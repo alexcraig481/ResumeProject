@@ -1,104 +1,105 @@
-
-var employmentArray = [];
-
-function Address(streetAddress, city, state, zipCode){
-    this.streetAddress = streetAddress;
-    this.city = city;
-    this.state = state;
-    this.zipCode = zipCode;
-    this.completeAddress = this.streetAddress + ", " + this.city + ", " + this.state + " " + this.zipCode;   
+function displayContactInfo(){
+    var person = {
+        name: form1.name.value,
+        physicalAddress: form1.address.value,
+        telephoneNumber: form1.telephone.value,
+        emailAddress: form1.email.value,
+     }
+    var contactInfo = "<address>" + person.name.toUpperCase() + 
+                   "<br>" + person.physicalAddress + 
+                   "<br>" + person.emailAddress + " / " + person.telephoneNumber + "</address> <br> <hr>";   
+    return contactInfo;
 }
 
-
-function Person(name, address, emailAddress, telephoneNumber, personalData){
-    this.name = name;
-    this.address = address;
-    this.emailAddress = emailAddress;
-    this.telephoneNumber = telephoneNumber;
-    this.personalData = personalData;
+function displayCarrerObjective(){
+    var objective = form1.objective.value;    
+    var carrerObjective = "<section><p>CAREER OBJECTIVES</p><p>" + objective + "</p></section>"; 
+    return carrerObjective;
 }
 
-Person.prototype.displayPerson = function(){
-    document.write("<address>" + this.name.toUpperCase() + 
-                   "<br>" + this.address.completeAddress + 
-                   "<br>" + this.emailAddress + " / " + this.telephoneNumber + "</address> <br> <hr>"); 
-      
+function displayPersonalData(){
+    var data = form1.personalData.value;
+    var personalData = "<section><p>PERSONAL DATA</p><p>" + data + "</p></section>";
+    return personalData;
 }
 
-Person.prototype.displayPersonalData = function(){
-    document.write("<section><p>PERSONAL DATA</p><p>" + this.personalData + "</p></section>");
+function displayEducation(){
+    var schooling = form1.education.value;
+    var education = "<section><p>EDUCATION</p><p>" + schooling + "</p></section>";
+    return education;
 }
 
-function Employment(startDate, endDate, description){
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.description = description;  
+function displayReferences(){
+    var businessReference = form1.reference.value; 
+    var references = "<section><p>CHARACTER<br>REFERENCES</p><p>Upon Request</p></section>";
+    references += "<section><p>BUSINESS<br>REFERENCES</p><p>" + businessReference + "</p></section>"; 
+    return references;
 }
 
-function Resume(person, carrerObjectives, education, employment, businessReferences){
-    this.person = person;
-    this.carrerObjectives = carrerObjectives;
-    this.education = education;
-    this.employment = employment;
-    this.businessReferences = businessReferences;
-    
-}
-
-Resume.prototype.displayResume = function(){
-    this.person.displayPerson();
-    document.write("<section><p>CAREER OBJECTIVES</p><p>" + this.carrerObjectives + "</p></section>");
-    this.person.displayPersonalData();
-    document.write("<section><p>EDUCATON</p><p>" + this.education + "</p></section>");
-    this.resume
-    
-}
-
-Resume.prototype.addToEmploymentArray = function(employmentEntry){ 
-    employmentArray.push(employmentEntry);
-}
-
-Resume.prototype.displayEmployment = function(array){
-    document.write("<section>");
-    for(var index = 0; index < array.length; ++index){
-        document.write("<p>" + array[index].startDate + " - " + array[index].endDate + "</p>" +
-         "<p>" + array[index].description + "</p>");    
+function getRecords(){
+    function Record(startDate, endDate, description){
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
     }
-    document.write("</section>");
+    record0 = new Record(
+        form1.startDate0.value,
+        form1.endDate0.value,
+        form1.description0.value
+    );
+    record1 = new Record(
+        form1.startDate1.value,
+        form1.endDate1.value,
+        form1.description1.value
+    );
+    record2 = new Record(
+        form1.startDate2.value,
+        form1.endDate2.value,
+        form1.description2.value
+    );
+    record3 = new Record(
+        form1.startDate3.value,
+        form1.endDate3.value,
+        form1.description3.value
+    );
+    var recordsArray = [record0, record1, record2, record3];
+    return recordsArray;
 }
 
+function displayEmployment(){
+   var recordsArray = getRecords();
+    var employment = "<section><p>EMPLOYMENT <br> EXPERIENCE</p></section> ";
+    for(var index = 0; index < recordsArray.length; ++index){
+        employment += "<section><p>" + recordsArray[index].startDate + " - " + recordsArray[index].endDate + "</p><p>" + recordsArray[index].description + "</p></section>";
+    }
+    return employment;
+}
 
-var streetAddress = "4100 Spruce Drive";
-var city =  "Raleigh";
-var state = "NC";
-var zipCode = "27615";
+function displayResume() {
+    var form1 = document.form1;
+    var resume = displayContactInfo() + displayCarrerObjective() + displayPersonalData() + displayEducation() + displayEmployment() + displayReferences();      
+    var myWindow = window.open();
+    myWindow.document.write(resume);
 
-var name = "Mary Johnson";
-var emailAddress = "alexandra.craig@gmail.com";
-var telephoneNumber = "(984-999-1488)"
-var personalData = "voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
-var startDate = "1/12/2014";
-var endDate = "4/25/2015";
-var description = "description stuff";
-
-let address1 = new Address(streetAddress, city, state, zipCode);
-let user1 = new Person(name, address1, emailAddress, telephoneNumber, personalData);
-var education = "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in";
-var careerObj = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in. "
+  }
 
 
-let resume1 = new Resume(user1,careerObj , education, "employment","business references");
-resume1.displayResume();
+  
+ 
+  
 
 
-let emp1 = new Employment (startDate, endDate, description);
 
 
-let emp2 = new Employment("12/3/1204", "4/6/2345", "foobar" );
+    
+    
 
-resume1.addToEmploymentArray(emp1);
-resume1.addToEmploymentArray(emp2);
-resume1.displayEmployment(employmentArray);
+
+
+
+
+
+
 
 
 
