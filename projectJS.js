@@ -8,7 +8,14 @@ function emailIsValid (email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 
-
+function handleEvent(e){
+    var email = e.target.value;
+    if(emailIsValid(email)){
+        alert("yea");
+    }else{
+        alert("Email address entered is incorrect");
+    }
+}
 
 
 function startDoc(){
@@ -21,18 +28,12 @@ function displayContactInfo(){
         name: form1.name.value,
         physicalAddress: form1.address.value,
         telephoneNumber: form1.telephone.value,
+        emailAddress: form1.email.value,
      }
-    if(emailIsValid(form1.email.value)){
-        person.emailAddress = form1.email.value;
-    } else{
-        alert("The email address entered is invalid.");
-        preventDefault(); 
-    }
     var contactInfo = "<address>" + "<span>" + person.name.toUpperCase() + 
                    "</span><div class = \"address-split\"><div>" + person.physicalAddress + "</div><div>" + person.emailAddress + " / " + person.telephoneNumber + "</div></div></address> <br> <hr>";   
     return contactInfo;
 }
-
 
 
 function displayCarrerObjective(){
@@ -112,7 +113,7 @@ function displayResume() {
   
 }
 
-
+document.getElementById("email").addEventListener("change",handleEvent);
 
   
   
