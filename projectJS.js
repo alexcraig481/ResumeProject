@@ -11,15 +11,22 @@ function emailIsValid (email) {
 function handleEvent(e){
     var email = e.target.value;
     if(emailIsValid(email)){
-        alert("yea");
+        document.form1.setAttribute("onsubmit", "return true");
+        document.getElementById("submit").disabled = false;
+        e.target.parentElement.parentElement.style.backgroundColor = "#C2DFE3";
     }else{
-        alert("Email address entered is incorrect");
+        alert("Email address entered is incorrect.\nForm will not allow submission until correction is complete.");
+        e.target.parentElement.parentElement.style.backgroundColor = "#ffc0cb";
+        document.form1.setAttribute("onsubmit", "return false");
+        document.getElementById("submit").disabled= true;
     }
 }
 
 
+
+
 function startDoc(){
-    var docStart = "<!DOCTYPE html><html lang = \"en\"><head><title>WEB 115 Final Project</title><link rel = \"stylesheet\" href = \"projectCss.css\"><body><div class = \"resume-container\"><main class = \"resume\">";
+    var docStart = "<!DOCTYPE html><html lang = \"en\"><head><title>WEB 115 Final Project</title><link rel = \"stylesheet\" href = \"projectCSS.css\"><body><div class = \"resume-container\"><main class = \"resume\">";
     return docStart;
 }
 
@@ -114,6 +121,7 @@ function displayResume() {
 }
 
 document.getElementById("email").addEventListener("change",handleEvent);
+document.getElementById("submit").addEventListener("click",displayResume);
 
   
   

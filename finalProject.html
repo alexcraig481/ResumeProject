@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href = "projectCss.css">
+    <link rel = "stylesheet" href = "projectCSS.css">
     <title>WEB 115 Final Project</title>
 </head>
 <body>
@@ -13,13 +13,13 @@
             <h1 class = "form">Build Your Resume</h1>
         </header>
         <main>
-            <form name = "form1">
+            <form name = "form1" >
             <section class = "group top">
                     <p><label for = "name">Full Name: </label><input type = "text" name = "name" id = "name" ></p>
                     <p><label for = "address">Full Address:<input type = "text" name = "address" id = "address"></label></p>
                 
                     <p><label for = "telephone">Telephone Number:<input type = "text" name = "telephone" id = "telephone"></label></p>
-                    <p><label for = "email">Email Address:<input type = "text" name = "email" id = "email"></label></p>
+                    <p id = "email-paragraph"><label for = "email">Email Address:<input type = "text" name = "email" id = "email" required></label></p>
                 
                 <p><label for = "personalData">Personal Data:<textarea name = "personalData" id = "personalData"></textarea></label></p>
             </section>
@@ -67,7 +67,7 @@
             </section> 
               
             <section class = "button">
-                <button type = "submit" name = "submit" onclick = "displayResume()">Create Resume</button>
+                <button type = "submit" name = "submit" id = "submit">Create Resume</button>
             </section>
                 
             </form>
